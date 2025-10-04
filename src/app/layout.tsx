@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Suspense } from "react";
 import "./globals-emerald.css";
+import { ReactQueryProvider } from "@/lib/react-query-provider";
 
 export const metadata: Metadata = {
   title: "Prestige Properties - Luxury Real Estate",
@@ -26,7 +27,7 @@ export default function RootLayout({
             defaultTheme="light"
             storageKey="prestige-properties-theme"
           >
-            {children}
+            <ReactQueryProvider>{children}</ReactQueryProvider>
           </ThemeProvider>
         </Suspense>
         <Analytics />
