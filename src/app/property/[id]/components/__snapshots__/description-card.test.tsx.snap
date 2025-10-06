@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PropertyDetailPageDescriptionCard matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm mb-8"
+    data-slot="card"
+  >
+    <div
+      class="p-6"
+      data-slot="card-content"
+    >
+      <h2
+        class="mb-4 font-serif text-2xl font-semibold text-foreground"
+      >
+        About This Property
+      </h2>
+      <p
+        class="leading-relaxed text-muted-foreground"
+      >
+        Snapshot description
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

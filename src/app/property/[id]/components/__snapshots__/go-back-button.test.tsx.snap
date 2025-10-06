@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PropertyDetailPageGoBackButton matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    data-testid="link"
+    href="/"
+  >
+    <button
+      class="mb-6"
+      data-testid="button"
+      variant="ghost"
+    >
+      <svg
+        class="mr-2 h-4 w-4"
+        data-testid="icon"
+      />
+      Back to Properties
+    </button>
+  </a>
+</DocumentFragment>
+`;
