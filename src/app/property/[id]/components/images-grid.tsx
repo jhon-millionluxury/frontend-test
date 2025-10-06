@@ -1,8 +1,8 @@
-import { Property } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/dtos/porperty.dto";
 import Image from "next/image";
 
 interface PropertyDetailPageImagesGridProps {
-  property: Partial<Property>;
+  property: Partial<PropertyDto>;
 }
 
 const PropertyDetailPageImagesGrid = ({

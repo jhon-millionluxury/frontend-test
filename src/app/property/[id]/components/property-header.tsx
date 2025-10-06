@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
-import { Property } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/dtos/porperty.dto";
 import { formatPrice } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 
 interface PropertyDetailPagePropertyHeaderProps {
-  property: Partial<Property>;
+  property: Partial<PropertyDto>;
 }
 
 const PropertyDetailPagePropertyHeader = ({

@@ -2,10 +2,10 @@ import { Bed, Bath, Maximize, Calendar, Ruler, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatNumber } from "@/lib/utils";
-import { Property } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/dtos/porperty.dto";
 
 interface PropertyDetailPageSidebarProps {
-  property: Partial<Property>;
+  property: Partial<PropertyDto>;
 }
 
 const PropertyDetailPageSidebar = ({

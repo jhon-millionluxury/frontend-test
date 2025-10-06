@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Bed, Bath, Maximize, MapPin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Property } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/dtos/porperty.dto";
 import { formatNumber, formatPrice } from "@/lib/utils";
 
 interface PropertyCardProps {
-  property: Property;
+  property: PropertyDto;
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {

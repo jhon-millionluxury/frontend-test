@@ -1,22 +1,6 @@
-export interface Property {
-  id: number;
-  name: string;
-  address: string;
-  price: number;
-  bedrooms: number;
-  bathrooms: number;
-  sqft: number;
-  image: string;
-  features: string[];
-  description: string;
-  yearBuilt: number;
-  lotSize: number;
-  propertyType: string;
-  gallery: string[];
-  featured: boolean;
-}
+import { PropertyDto } from "./dtos/porperty.dto";
 
-export const properties: Property[] = [
+export const properties: PropertyDto[] = [
   {
     id: 1,
     name: "The Meridian Estate",

@@ -8,22 +8,24 @@ import PropertyDetailPageImagesGrid from "./components/images-grid";
 import PropertyDetailPagePropertyHeader from "./components/property-header";
 import PropertyDetailPageSidebar from "./components/sidebar";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return properties.map((property) => ({
     id: property.id.toString(),
   }));
 }
 
 interface PropertyDetailPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
-export default function PropertyDetailPage({
+export default async function PropertyDetailPage({
   params,
 }: PropertyDetailPageProps) {
-  const property = properties.find((p) => p.id === Number.parseInt(params.id));
+  const { id } = await params;
+
+  const property = await Promise.resolve(
+    properties.find((p) => p.id === Number.parseInt(id))
+  );
 
   if (!property) {
     notFound();

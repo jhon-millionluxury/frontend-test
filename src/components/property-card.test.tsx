@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { PropertyCard } from "@/components/property-card";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { Property } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/properties-data";
 import { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import { LinkProps } from "next/link";
 
@@ -44,7 +44,7 @@ jest.mock("next/link", () => {
   return MockLink;
 });
 
-const mockProperty: Property = {
+const mockProperty: PropertyDto = {
   id: 1,
   name: "Luxury Villa",
   address: "123 Palm Street",
