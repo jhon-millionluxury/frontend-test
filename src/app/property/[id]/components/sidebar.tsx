@@ -1,8 +1,8 @@
-import { Bed, Bath, Maximize, Calendar, Ruler, Home } from "lucide-react";
+import { Bed, Bath, Maximize, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatNumber } from "@/lib/utils";
-import { PropertyDto } from "@/lib/dtos/porperty.dto";
+import { PropertyDto } from "@/lib/dtos";
 
 interface PropertyDetailPageSidebarProps {
   property: Partial<PropertyDto>;
@@ -47,30 +47,10 @@ const PropertyDetailPageSidebar = ({
               </div>
             </div>
             <div className="flex items-center gap-3 text-muted-foreground">
-              <Ruler className="h-5 w-5 text-primary" />
-              <div>
-                <p className="text-sm">Lot Size</p>
-                <p className="font-semibold text-foreground">
-                  {formatNumber(property.lotSize || 0)} sqft
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 text-muted-foreground">
               <Calendar className="h-5 w-5 text-primary" />
               <div>
                 <p className="text-sm">Year Built</p>
-                <p className="font-semibold text-foreground">
-                  {property.yearBuilt}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 text-muted-foreground">
-              <Home className="h-5 w-5 text-primary" />
-              <div>
-                <p className="text-sm">Property Type</p>
-                <p className="font-semibold text-foreground">
-                  {property.propertyType}
-                </p>
+                <p className="font-semibold text-foreground">{property.year}</p>
               </div>
             </div>
           </div>

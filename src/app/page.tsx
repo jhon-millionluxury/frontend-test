@@ -7,13 +7,15 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProperties } from "@/lib/api/getProperties";
+import LuxuryLoader from "@/components/luxury-loader";
+import LuxuryError from "@/components/luxury-error";
 
 const ITEMS_PER_PAGE = 10;
 
 export default function PropertiesPage() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 1000000]);
+  const [priceRange, setPriceRange] = useState([0, 10000000]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -34,8 +36,8 @@ export default function PropertiesPage() {
     setCurrentPage(1);
   }, [name, address, priceRange]);
 
-  if (isLoading) return <p>Cargando...</p>;
-  if (error) return <p>Error 😢</p>;
+  if (isLoading) return <LuxuryLoader />;
+  if (error) return <LuxuryError />;
 
   return (
     <div className="min-h-screen bg-background">

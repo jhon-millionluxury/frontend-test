@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { PropertyDto } from "@/lib/dtos/porperty.dto";
+import { PropertyDto } from "@/lib/dtos";
 import { formatPrice } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 

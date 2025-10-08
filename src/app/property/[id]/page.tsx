@@ -1,5 +1,6 @@
-import { properties } from "@/lib/properties-local-data";
-import { notFound } from "next/navigation";
+"use client";
+
+import { notFound, useParams } from "next/navigation";
 import PropertyDetailPageDescriptionCard from "./components/description-card";
 import PropertyDetailPageFeaturesCard from "./components/features-card";
 import PropertyDetailPageGoBackButton from "./components/go-back-button";
@@ -7,25 +8,24 @@ import PropertyDetailPageHeader from "./components/header";
 import PropertyDetailPageImagesGrid from "./components/images-grid";
 import PropertyDetailPagePropertyHeader from "./components/property-header";
 import PropertyDetailPageSidebar from "./components/sidebar";
+import { useQuery } from "@tanstack/react-query";
+import { getPropertyById } from "@/lib/api/getPropertyById";
+import LuxuryLoader from "@/components/luxury-loader";
 
-export async function generateStaticParams() {
-  return properties.map((property) => ({
-    id: property.id.toString(),
-  }));
-}
+export default function PropertyDetailPage() {
+  const { id } = useParams<{ id: string }>();
 
-interface PropertyDetailPageProps {
-  params: Promise<{ id: string }>;
-}
+  const {
+    data: property,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["propertyById", id],
+    queryFn: () => getPropertyById(id),
+  });
 
-export default async function PropertyDetailPage({
-  params,
-}: PropertyDetailPageProps) {
-  const { id } = await params;
-
-  const property = await Promise.resolve(
-    properties.find((p) => p.id === Number.parseInt(id))
-  );
+  if (isLoading) return <LuxuryLoader text="Loading property details..." />;
+  if (error) return <p>Error 😢</p>;
 
   if (!property) {
     notFound();
