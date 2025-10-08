@@ -76,7 +76,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           ))}
         </div>
 
-        <Link href={`/property/${property.id}`}>
+        <Link href={`/property/${property.idProperty}`}>
           <Button className="w-full bg-transparent" variant="outline">
             View Details
             <ArrowRight className="ml-2 h-4 w-4" />
