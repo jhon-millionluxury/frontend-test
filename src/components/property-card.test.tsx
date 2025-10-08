@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { render, screen } from "@testing-library/react";
 import { PropertyCard } from "@/components/property-card";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { PropertyDto } from "@/lib/properties-local-data";
 import { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import { LinkProps } from "next/link";
+import { PropertyDto } from "@/lib/dtos";
 
 jest.mock("next/image", () => {
   type ImgProps = ComponentProps<"img"> & {
     fill?: boolean;
+    priority?: boolean;
   };
 
-  const MockImage = ({ fill, style, ...props }: ImgProps) => {
+  const MockImage = ({ fill, priority, style, ...props }: ImgProps) => {
     const mockStyle = fill
       ? { width: "100%", height: "100%", ...style }
       : style;
@@ -25,7 +27,7 @@ jest.mock("next/image", () => {
   return MockImage;
 });
 
-// Mock next/link para evitar problemas de routing en test
+// Mock next/link to avoid routing issues in tests
 jest.mock("next/link", () => {
   const MockLink: ComponentType<PropsWithChildren<LinkProps>> = ({
     children,
@@ -45,21 +47,27 @@ jest.mock("next/link", () => {
 });
 
 const mockProperty: PropertyDto = {
-  id: 1,
+  id: "1",
+  idProperty: "1",
   name: "Luxury Villa",
   address: "123 Palm Street",
   price: 1200000,
   bedrooms: 4,
   bathrooms: 3,
   sqft: 3500,
-  image: "string",
   features: ["Pool", "Garage", "Garden"],
   description: "string",
-  yearBuilt: 2,
-  lotSize: 3,
-  propertyType: "string",
-  gallery: [],
+  year: 2,
   featured: true,
+  images: [
+    {
+      id: "1",
+      idPropertyImage: "1",
+      enabled: true,
+      file: "string",
+      idProperty: "1",
+    },
+  ],
 };
 
 describe("PropertyCard", () => {

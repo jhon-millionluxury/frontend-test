@@ -12,7 +12,7 @@ const PropertyDetailPageImagesGrid = ({
     <div className="mb-12 grid gap-4 md:grid-cols-2">
       <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-muted md:col-span-2">
         <Image
-          src={property.images?.[0].file || "/placeholder.svg"}
+          src={property.images?.[0]?.file || "/placeholder.svg"}
           alt={property.name + " - Image"}
           fill
           className="object-cover"

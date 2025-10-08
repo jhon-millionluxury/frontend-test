@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { render, screen } from "@testing-library/react";
 import PropertyDetailPageImagesGrid from "./images-grid";
 import { ComponentProps } from "react";
 
+// Mock de next/image para Jest
 jest.mock("next/image", () => {
   type ImgProps = ComponentProps<"img"> & {
     fill?: boolean;
+    priority?: boolean;
   };
 
-  const MockImage = ({ fill, style, ...props }: ImgProps) => {
+  const MockImage = ({ fill, priority, style, ...props }: ImgProps) => {
     const mockStyle = fill
       ? { width: "100%", height: "100%", ...style }
       : style;
@@ -22,11 +25,32 @@ jest.mock("next/image", () => {
 });
 
 describe("PropertyDetailPageImagesGrid", () => {
-  it("renders main image with property.image", () => {
+  it("renders main image with property.images[0].file", () => {
     const property = {
       name: "Test Property",
-      image: "/main.jpg",
-      gallery: ["/main.jpg", "/gallery1.jpg", "/gallery2.jpg"],
+      images: [
+        {
+          id: "1",
+          file: "/main.jpg",
+          idProperty: "1",
+          idPropertyImage: "1",
+          enabled: true,
+        },
+        {
+          id: "2",
+          file: "/gallery1.jpg",
+          idProperty: "1",
+          idPropertyImage: "2",
+          enabled: true,
+        },
+        {
+          id: "3",
+          file: "/gallery2.jpg",
+          idProperty: "1",
+          idPropertyImage: "3",
+          enabled: true,
+        },
+      ],
     };
 
     render(<PropertyDetailPageImagesGrid property={property} />);
@@ -47,10 +71,10 @@ describe("PropertyDetailPageImagesGrid", () => {
     );
   });
 
-  it("renders placeholder if property.image is missing", () => {
+  it("renders placeholder if property.images is missing or empty", () => {
     const property = {
       name: "No Image Property",
-      gallery: [],
+      images: [],
     };
 
     render(<PropertyDetailPageImagesGrid property={property} />);
@@ -63,9 +87,24 @@ describe("PropertyDetailPageImagesGrid", () => {
 
   it("renders only available gallery images (max 2)", () => {
     const property = {
+      id: "1",
       name: "Gallery Test",
-      image: "/main.jpg",
-      gallery: ["/main.jpg", "/gallery1.jpg"],
+      images: [
+        {
+          id: "1",
+          file: "/main.jpg",
+          idProperty: "1",
+          idPropertyImage: "1",
+          enabled: true,
+        },
+        {
+          id: "2",
+          file: "/gallery1.jpg",
+          idProperty: "1",
+          idPropertyImage: "2",
+          enabled: true,
+        },
+      ],
     };
 
     render(<PropertyDetailPageImagesGrid property={property} />);

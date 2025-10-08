@@ -7,9 +7,7 @@ describe("PropertyDetailPageSidebar", () => {
     bedrooms: 3,
     bathrooms: 2,
     sqft: 1500,
-    lotSize: 4000,
-    yearBuilt: 1995,
-    propertyType: "House",
+    year: 1995,
   };
 
   it("renders all property details correctly", () => {
@@ -35,21 +33,9 @@ describe("PropertyDetailPageSidebar", () => {
       screen.getByText(`${formatNumber(mockProperty.sqft)} sqft`)
     ).toBeInTheDocument();
 
-    expect(screen.getByText("Lot Size")).toBeInTheDocument();
-
-    expect(
-      screen.getByText(`${formatNumber(mockProperty.lotSize)} sqft`)
-    ).toBeInTheDocument();
-
     expect(screen.getByText("Year Built")).toBeInTheDocument();
 
-    expect(
-      screen.getByText(mockProperty.yearBuilt.toString())
-    ).toBeInTheDocument();
-
-    expect(screen.getByText("Property Type")).toBeInTheDocument();
-
-    expect(screen.getByText(mockProperty.propertyType)).toBeInTheDocument();
+    expect(screen.getByText(mockProperty.year.toString())).toBeInTheDocument();
   });
 
   it("renders the action buttons", () => {

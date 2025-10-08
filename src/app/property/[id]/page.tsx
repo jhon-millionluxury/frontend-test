@@ -11,6 +11,7 @@ import PropertyDetailPageSidebar from "./components/sidebar";
 import { useQuery } from "@tanstack/react-query";
 import { getPropertyById } from "@/lib/api/getPropertyById";
 import LuxuryLoader from "@/components/luxury-loader";
+import LuxuryError from "@/components/luxury-error";
 
 export default function PropertyDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +26,7 @@ export default function PropertyDetailPage() {
   });
 
   if (isLoading) return <LuxuryLoader text="Loading property details..." />;
-  if (error) return <p>Error 😢</p>;
+  if (error) return <LuxuryError />;
 
   if (!property) {
     notFound();
