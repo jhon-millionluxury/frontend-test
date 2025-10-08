@@ -1,4 +1,4 @@
-import { getCharacters } from "./character";
+import { getProperties } from "./getProperties";
 import { apiClient } from "../apiClient";
 
 jest.mock("../apiClient", () => ({
@@ -7,15 +7,15 @@ jest.mock("../apiClient", () => ({
   },
 }));
 
-describe("getCharacters API", () => {
-  it("returns characters when API call succeeds", async () => {
+describe("Get Properties API", () => {
+  it("returns properties when API call succeeds", async () => {
     const mockData = { results: [{ id: 1, name: "Homer" }] };
 
     (apiClient.get as jest.Mock).mockResolvedValueOnce(mockData);
 
-    const result = await getCharacters();
+    const result = await getProperties();
 
-    expect(apiClient.get).toHaveBeenCalledWith("/characters");
+    expect(apiClient.get).toHaveBeenCalledWith("/Property");
     expect(result).toEqual(mockData);
   });
 
@@ -24,6 +24,6 @@ describe("getCharacters API", () => {
       new Error("Network error")
     );
 
-    await expect(getCharacters()).rejects.toThrow("Network error");
+    await expect(getProperties()).rejects.toThrow("Network error");
   });
 });

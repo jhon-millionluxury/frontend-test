@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import PropertyDetailPage, { generateStaticParams } from "./page";
-import { properties } from "@/lib/properties-data";
+import { properties } from "@/lib/properties-local-data";
 import { notFound } from "next/navigation";
 
 jest.mock("next/navigation", () => ({

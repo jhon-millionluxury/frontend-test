@@ -1,4 +1,4 @@
-import { properties } from "@/lib/properties-data";
+import { properties } from "@/lib/properties-local-data";
 import { notFound } from "next/navigation";
 import PropertyDetailPageDescriptionCard from "./components/description-card";
 import PropertyDetailPageFeaturesCard from "./components/features-card";

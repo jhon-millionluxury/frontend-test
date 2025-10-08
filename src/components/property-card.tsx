@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Bed, Bath, Maximize, MapPin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { PropertyDto } from "@/lib/dtos/porperty.dto";
 import { formatNumber, formatPrice } from "@/lib/utils";
+import { PropertyDto } from "@/lib/dtos/property.dto";
 
 interface PropertyCardProps {
   property: PropertyDto;
@@ -16,10 +16,12 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <Card className="group overflow-hidden transition-all hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         <Image
-          src={property.image || "/placeholder.svg"}
+          src={property.images[0].file || "/placeholder.svg"}
           alt={property.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 1200px"
+          priority
         />
         {property.featured && (
           <div className="absolute right-3 top-3">

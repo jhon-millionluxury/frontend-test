@@ -1,5 +1,8 @@
-import { CharacterDto } from "./character.dto";
+import { PropertyDto } from "./property.dto";
 
 export interface ResponseDto {
-  results: CharacterDto[];
+  currentPage: number;
+  totalPages: number;
+  totalResults: number;
+  items: PropertyDto[];
 }

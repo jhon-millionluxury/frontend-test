@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { PropertyCard } from "@/components/property-card";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { PropertyDto } from "@/lib/properties-data";
+import { PropertyDto } from "@/lib/properties-local-data";
 import { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import { LinkProps } from "next/link";
 

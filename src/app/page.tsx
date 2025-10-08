@@ -6,17 +6,28 @@ import { Building2 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getCharacters } from "@/lib/api/character";
-import { ResponseDto } from "@/lib/dtos/response.dto";
+import { getProperties } from "@/lib/api/getProperties";
+
+const ITEMS_PER_PAGE = 10;
 
 export default function PropertiesPage() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [priceRange, setPriceRange] = useState([0, 10000000]);
 
-  const { data, isLoading, error } = useQuery<ResponseDto>({
-    queryKey: ["characters"],
-    queryFn: getCharacters,
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["properties", name, address, priceRange, currentPage],
+    queryFn: () =>
+      getProperties({
+        name,
+        address,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
+        page: currentPage,
+        pageSize: ITEMS_PER_PAGE,
+      }),
   });
 
   useEffect(() => {
@@ -47,12 +58,6 @@ export default function PropertiesPage() {
         </div>
       </header>
 
-      <ul>
-        {data?.results?.map((character) => (
-          <li key={character.id}>{character.name}</li>
-        ))}
-      </ul>
-
       <main className="container mx-auto px-4 py-8 lg:px-8 lg:py-12">
         <div className="mb-8">
           <h2 className="font-serif text-3xl font-semibold tracking-tight text-foreground text-balance lg:text-4xl">
@@ -69,7 +74,14 @@ export default function PropertiesPage() {
           onPriceRangeChange={setPriceRange}
         />
 
-        <PropertyGrid />
+        {data && (
+          <PropertyGrid
+            apiResponse={data}
+            currentPage={currentPage}
+            onSetCurrentPage={setCurrentPage}
+            pageSize={ITEMS_PER_PAGE}
+          />
+        )}
       </main>
     </div>
   );
