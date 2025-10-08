@@ -13,7 +13,7 @@ const ITEMS_PER_PAGE = 10;
 export default function PropertiesPage() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 10000000]);
+  const [priceRange, setPriceRange] = useState([0, 1000000]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -31,7 +31,7 @@ export default function PropertiesPage() {
   });
 
   useEffect(() => {
-    console.log(name, address, priceRange);
+    setCurrentPage(1);
   }, [name, address, priceRange]);
 
   if (isLoading) return <p>Cargando...</p>;
@@ -72,6 +72,9 @@ export default function PropertiesPage() {
           onNameChange={setName}
           onAddressChange={setAddress}
           onPriceRangeChange={setPriceRange}
+          name={name}
+          address={address}
+          priceRangeFilter={priceRange}
         />
 
         {data && (

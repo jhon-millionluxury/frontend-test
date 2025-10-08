@@ -1,28 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Search } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
 import { formatPrice } from "@/lib/utils";
 
 interface PropertyFiltersProps {
-  onNameChange: (value: string) => void;
-  onAddressChange: (value: string) => void;
-  onPriceRangeChange: (value: number[]) => void;
+  onNameChange?: (name: string) => void;
+  onAddressChange?: (address: string) => void;
+  onPriceRangeChange?: (range: number[]) => void;
+  name: string;
+  address: string;
+  priceRangeFilter: number[];
 }
 
 export function PropertyFilters({
   onNameChange,
   onAddressChange,
   onPriceRangeChange,
+  name: nameFilter,
+  address: addressFilter,
+  priceRangeFilter,
 }: PropertyFiltersProps) {
-  const [priceRange, setPriceRange] = useState([0, 10000000]);
+  const [name, setName] = useState(nameFilter);
+  const [address, setAddress] = useState(addressFilter);
+  const [priceRange, setPriceRange] = useState(priceRangeFilter);
 
+  // Debounce delay
+  const DEBOUNCE_DELAY = 1000;
+
+  // Debounce para name
   useEffect(() => {
-    onPriceRangeChange?.(priceRange);
-  }, [onPriceRangeChange, priceRange]);
+    const handler = setTimeout(() => {
+      onNameChange?.(name);
+    }, DEBOUNCE_DELAY);
+    return () => clearTimeout(handler);
+  }, [name, onNameChange]);
+
+  // Debounce para address
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      onAddressChange?.(address);
+    }, DEBOUNCE_DELAY);
+    return () => clearTimeout(handler);
+  }, [address, onAddressChange]);
+
+  // Debounce para price range
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      onPriceRangeChange?.(priceRange);
+    }, DEBOUNCE_DELAY);
+    return () => clearTimeout(handler);
+  }, [priceRange, onPriceRangeChange]);
 
   return (
     <div className="mb-8 rounded-lg border border-border bg-card p-6 shadow-sm">
@@ -42,7 +73,8 @@ export function PropertyFilters({
               type="text"
               placeholder="Search by name..."
               className="pl-10"
-              onChange={(e) => onNameChange(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
         </div>
@@ -58,7 +90,8 @@ export function PropertyFilters({
               type="text"
               placeholder="Search by address..."
               className="pl-10"
-              onChange={(e) => onAddressChange(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
         </div>
