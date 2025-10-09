@@ -36,7 +36,6 @@ export default function PropertiesPage() {
     setCurrentPage(1);
   }, [name, address, priceRange]);
 
-  if (isLoading) return <LuxuryLoader />;
   if (error) return <LuxuryError />;
 
   return (
@@ -78,6 +77,8 @@ export default function PropertiesPage() {
           address={address}
           priceRangeFilter={priceRange}
         />
+
+        {isLoading && <LuxuryLoader />}
 
         {data && (
           <PropertyGrid
